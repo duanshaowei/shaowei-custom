@@ -1,0 +1,7 @@
+/shaowei-custom-web/target/classes/com/shaowei/custom/controller/*.class
+/shaowei-custom-web/target/classes/com/shaowei/custom/web/utilities/*.class
+shaowei-custom-web
+service
+repository
+generate
+common
