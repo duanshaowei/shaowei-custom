@@ -23,7 +23,6 @@ public class NetWorkAddressUtils {
 	/**
 	 * 获取系统服务地址
 	 * 
-	 * @see com.shaowei.custom.web.utilities.NetWorkAddressUtils.getServerPath
 	 * @return 服务地址
 	 */
 	public static String getServerPath() {
@@ -36,7 +35,6 @@ public class NetWorkAddressUtils {
 	/**
 	 * 获取访问者的IP地址
 	 * 
-	 * @see com.shaowei.custom.web.utilities.NetWorkAddressUtils.getClientIpAddress
 	 * @param request
 	 * @return
 	 */
