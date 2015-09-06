@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 设置缓存文件 .data 的创建路径。 如果该路径是 Java 系统参数，当前虚拟机会重新赋值。 下面的参数这样解释： user.home 
+	– 用户主目录 user.dir – 用户当前工作目录 java.io.tmpdir – 默认临时文件路径 -->
+
+<!-- 缺省缓存配置。CacheManager 会把这些配置应用到程序中。 下列属性是 defaultCache 必须的： maxInMemory 
+	- 设定内存中创建对象的最大值。 eternal - 设置元素（译注：内存中对象）是否永久驻留。如果是，将忽略超 时限制且元素永不消亡。 timeToIdleSeconds 
+	- 设置某个元素消亡前的停顿时间。 也就是在一个元素消亡之前，两次访问时间的最大时间间隔值。 这只能在元素不是永久驻留时有效（译注：如果对象永恒不灭，则 
+	设置该属性也无用）。 如果该值是 0 就意味着元素可以停顿无穷长的时间。 timeToLiveSeconds - 为元素设置消亡前的生存时间。 也就是一个元素从构建到消亡的最大时间间隔值。 
+	这只能在元素不是永久驻留时有效。 overflowToDisk - 设置当内存中缓存达到 maxInMemory 限制时元素是否可写到磁盘 上。 -->
+
+<!-- 必须选项: diskStore：指定数据存储位置，可指定磁盘中的文件夹位置 defaultCache： 默认的管理策略 以下属性是必须的： 
+	name： Cache的名称，必须是唯一的(ehcache会把这个cache放到HashMap里)。 maxElementsInMemory： 在内存中缓存的element的最大数目。 
+	maxElementsOnDisk：在磁盘上缓存的element的最大数目，默认值为0，表示不限制。 eternal：设定缓存的elements是否永远不过期。如果为true，则缓存的数据始终有效，如果为false那么还要根据timeToIdleSeconds，timeToLiveSeconds判断。 
+	overflowToDisk： 如果内存中数据超过内存限制，是否要缓存到磁盘上。 -->
+<!-- 缓存的3 种清空策略: FIFO ，first in first out (先进先出). LFU ， Less Frequently Used 
+	(最少使用).意思是一直以来最少被使用的。缓存的元素有一个hit 属性，hit 值最小的将会被清出缓存。 LRU ，Least Recently 
+	Used(最近最少使用). (ehcache默认值).缓存的元素有一个时间戳，当缓存容量满了，而又需要腾出地方来缓存新的元素的时候，那么现有缓存元素中时间戳离当前时间最远的元素将被清出缓存。 -->
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"
+	updateCheck="false">
+
+
+	<diskStore path="java.io.tmpdir" />
+
+	<cacheManagerPeerProviderFactory
+		class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
+		properties="peerDiscovery=manual,
+        rmiUrls=//localhost:45678/poseidonCache|//localhost:45679/poseidonCache" />
+
+	<cacheManagerPeerListenerFactory
+		class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory"
+		properties="hostName=localhost, port=45678,
+        socketTimeoutMillis=2000" />
+
+	<!-- 以下属性是可选的: timeToIdleSeconds：对象空闲时间，指对象在多长时间没有被访问就会失效。只对eternal为false的有效。默认值0，表示一直可以访问。 
+		timeToLiveSeconds：对象存活时间，指对象从创建到失效所需要的时间。只对eternal为false的有效。默认值0，表示一直可以访问。 
+		diskPersistent： 是否在磁盘上持久化。指重启jvm后，数据是否有效。默认为false。 diskExpiryThreadIntervalSeconds： 
+		对象检测线程运行时间间隔。标识对象状态的线程多长时间运行一次。 diskSpoolBufferSizeMB： DiskStore使用的磁盘大小，默认值30MB。每个cache使用各自的DiskStore。 
+		memoryStoreEvictionPolicy： 如果内存中数据超过内存限制，向磁盘缓存时的策略。默认值LRU，可选FIFO、LFU。 -->
+	<defaultCache eternal="false" maxElementsInMemory="1000"
+		overflowToDisk="false" diskPersistent="false" timeToIdleSeconds="0"
+		timeToLiveSeconds="600" memoryStoreEvictionPolicy="LRU" />
+
+
+	<cache name="poseidonCache" maxElementsInMemory="10000" eternal="false"
+		overflowToDisk="true" timeToIdleSeconds="1800" timeToLiveSeconds="3600"
+		diskSpoolBufferSizeMB="30" maxEntriesLocalDisk="10000000"
+		diskPersistent="true" diskExpiryThreadIntervalSeconds="120"
+		memoryStoreEvictionPolicy="LFU" statistics="false">
+		<cacheEventListenerFactory
+			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+			properties="replicateAsynchronously=true,     
+                replicatePuts=true,     
+                replicateUpdates=true,    
+                    replicateUpdatesViaCopy=true,     
+                replicateRemovals=true " />
+	</cache>
+</ehcache>
