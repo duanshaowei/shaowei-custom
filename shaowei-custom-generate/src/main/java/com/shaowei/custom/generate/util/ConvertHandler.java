@@ -26,7 +26,7 @@ public class ConvertHandler {
 					+ table.getTableName() + " ] ,不包含任何列信息...");
 		/************** 生成类名 *******************/
 		String clazzName = Resources.TPL_CLASS_NAME;// 配置文件中该表对应的类名
-		if (StringUtils.isBlank(clazzName))
+		if (StringUtils.isNotBlank(table.getTableName()))
 			clazzName = table2clazzName(table.getTableName());// 根据表名转换类名
 		table.setClazzName(clazzName);
 		/************** 数据库类型转JAVA类型 *******************/
