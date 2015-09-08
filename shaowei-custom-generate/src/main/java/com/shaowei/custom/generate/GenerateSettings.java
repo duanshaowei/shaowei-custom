@@ -9,8 +9,8 @@ import com.shaowei.custom.generate.util.Resources;
 import freemarker.template.Template;
 
 /** 
- * @author 	<a href="mailto:ketayao@gmail.com">ketayao</a>
- * @since   2013年10月23日 下午2:44:03 
+ * @author 	ShaoWei Duan
+ * @since   2015年09月08日 下午2:44:03 
  */
 public class GenerateSettings extends AbstractGenerate {
 	

@@ -19,6 +19,12 @@
 			<artifactId>freemarker</artifactId>
 		</dependency> 	
 	
+	    <!-- oracle -->
+		<dependency>
+		  <groupId>ojdbc</groupId>
+		  <artifactId>ojdbc</artifactId>
+		</dependency>
+	
 		<!-- SPRING basic begin(一般不需要显式定义) -->
 		<dependency>
 			<groupId>org.springframework</groupId>

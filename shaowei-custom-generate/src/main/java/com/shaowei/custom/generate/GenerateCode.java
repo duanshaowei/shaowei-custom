@@ -13,8 +13,8 @@ import freemarker.template.Template;
 
 
 /** 
- * @author 	<a href="mailto:ketayao@gmail.com">ketayao</a>
- * @since   2013年10月23日 下午3:02:33 
+ * @author 	ShaoWei Duan
+ * @since   2015年09月08日 下午3:02:33 
  */
 public class GenerateCode extends AbstractGenerate implements Generate {
 	FileType fileType = null;
@@ -29,8 +29,10 @@ public class GenerateCode extends AbstractGenerate implements Generate {
 	 */
 	@Override
 	public void generate(Table table) throws Exception {
-		model.put("tableName", table.getTableName().toLowerCase());
+		model.put("tableName", table.getTableName());
 		model.put("columns", table.getColumns());
+		model.put("createDate", table.getCreateDate());
+		model.put("driveType", table.getDriveType());
 		
 		// 特殊类型处理
 		handleSpecial(table.getColumns());

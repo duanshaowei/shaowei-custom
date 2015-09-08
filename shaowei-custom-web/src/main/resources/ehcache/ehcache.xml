@@ -21,7 +21,7 @@
 	updateCheck="false">
 
 
-	<diskStore path="java.io.tmpdir" />
+	<diskStore path="java.io.tmpdir/shaowei-custom/hibernate" />
 
 	<cacheManagerPeerProviderFactory
 		class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
@@ -43,7 +43,7 @@
 		timeToLiveSeconds="600" memoryStoreEvictionPolicy="LRU" />
 
 
-	<cache name="poseidonCache" maxElementsInMemory="10000" eternal="false"
+	<cache name="customCache" maxElementsInMemory="10000" eternal="false"
 		overflowToDisk="true" timeToIdleSeconds="1800" timeToLiveSeconds="3600"
 		diskSpoolBufferSizeMB="30" maxEntriesLocalDisk="10000000"
 		diskPersistent="true" diskExpiryThreadIntervalSeconds="120"

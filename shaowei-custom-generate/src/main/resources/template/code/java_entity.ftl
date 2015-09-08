@@ -1,6 +1,3 @@
-/**
- * There are <a href="https://github.com/ketayao/keta-custom">keta-custom</a> code generation
- */
 package ${pknEntity};
 
 <#if hasDate == true>
@@ -21,13 +18,25 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 </#if>
 
-import com.ketayao.ketacustom.entity.Idable;
-
+import com.shaowei.custom.common.entity.IdEntity;
+/**
+  *   
+  *   @author Shaowei Duan
+  *   @since  ${createDate?string("yyyy年MM月dd日 HH:mm:ss")}
+  *
+  */
 @Entity
 @Table(name="${tableName}")
-public class ${className} implements Idable<Long>{
+public class ${className} implements IdEntity<Long>{
+	
+	<#if driveType == "MYSQL">
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+    <#elseif driveType == "ORACLE">
+	@Id
+	@SequenceGenerator(name = "generator", sequenceName = "SEQ_${tableName}")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
+	</#if>
     private Long id;
     
     <#list columns as column>

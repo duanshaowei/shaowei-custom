@@ -10,8 +10,8 @@ import freemarker.template.Template;
 
 
 /** 
- * @author 	<a href="mailto:ketayao@gmail.com">ketayao</a>
- * @since   2013年10月24日 上午9:55:58 
+ * @author 	ShaoWei Duan
+ * @since   2015年09月08日 上午9:55:58 
  */
 public class GenerateServer extends AbstractGenerate {
 	public GenerateServer() {
