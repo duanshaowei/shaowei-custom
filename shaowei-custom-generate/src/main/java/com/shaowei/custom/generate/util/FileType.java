@@ -11,6 +11,7 @@ import java.util.regex.Matcher;
  */
 public enum FileType {
 	ENTITY("entity", Resources.PKN_ENTITY,Resources.JAVA_ENTITY_TEMPLATE,".java"), 
+	ENTITY_VO("entity_vo", Resources.PKN_ENTITY_VO,Resources.JAVA_ENTITY_VO_TEMPLATE,".java"), 
 	DAO("dao", Resources.PKN_DAO,Resources.JAVA_DAO_TEMPLATE,"DAO.java"), 
 	SERVICE("service", Resources.PKN_SERVICE,Resources.JAVA_SERVICE_TEMPLATE,"Service.java"), 
 	SERVICE_IMPL("service.impl", Resources.PKN_SERVICE_IMPL,Resources.JAVA_SERVICE_IMPL_TEMPLATE,"ServiceImpl.java"), 

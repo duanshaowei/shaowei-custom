@@ -1,9 +1,12 @@
 package com.shaowei.custom.generate.vo;
 
+import java.util.Date;
 import java.util.List;
 
 public class Table {
-
+    
+	private String driveType ;
+	
 	private String tableName;
 
 	private Column pk;// 主键
@@ -15,6 +18,8 @@ public class Table {
 	private List<Column> columns;//所有列
 
 	private String clazzName;// javabean name
+	
+	private Date createDate = new Date();
 
 	public Table() {
 	}
@@ -23,6 +28,18 @@ public class Table {
 		setTableName(tableName);
 	}
 
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	public String getDriveType() {
+		return driveType;
+	}
+
+	public void setDriveType(String driveType) {
+		this.driveType = driveType;
+	}
+	
 	public void setTableName(String tableName) {
 		this.tableName = tableName;
 	}

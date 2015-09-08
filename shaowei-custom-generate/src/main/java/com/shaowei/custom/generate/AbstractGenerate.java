@@ -16,7 +16,7 @@ import com.shaowei.custom.generate.util.Resources;
 import freemarker.template.Configuration;
 
 /** 
- * @author 	<a href="mailto:ketayao@gmail.com">ketayao</a>
+ * @author 	ShaoWei Duan
  * @since   2013年10月23日 下午2:45:54 
  */
 public abstract class AbstractGenerate {

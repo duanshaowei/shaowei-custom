@@ -117,6 +117,13 @@
 			<scope>runtime</scope>
 		</dependency>
 		
+		<!-- oracle -->
+		<dependency>
+		  <groupId>ojdbc</groupId>
+		  <artifactId>ojdbc</artifactId>
+		  <version>7</version>
+		</dependency>
+		
 		<!-- GENERAL UTILS begin -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>

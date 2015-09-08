@@ -7,7 +7,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 
 /** 
- * @author 	<a href="mailto:ketayao@gmail.com">ketayao</a>
+ * @author 	ShaoWei Duan
  * @since   2014年1月9日 下午5:06:18 
  */
 public class CopyCommonFile extends AbstractGenerate {

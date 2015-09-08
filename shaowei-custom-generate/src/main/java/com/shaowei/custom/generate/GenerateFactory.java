@@ -9,8 +9,8 @@ import com.shaowei.custom.generate.util.Resources;
 import com.shaowei.custom.generate.vo.Table;
 
 /** 
- * @author 	<a href="mailto:ketayao@gmail.com">ketayao</a>
- * @since   2013年10月22日 下午3:53:35 
+ * @author 	ShaoWei Duan
+ * @since   2015年09月08日 下午3:53:35 
  */
 public class GenerateFactory {
 	private Table table;
@@ -50,6 +50,7 @@ public class GenerateFactory {
 				init();
 			}
 			new GenerateCode(FileType.ENTITY).generate(table);
+			new GenerateCode(FileType.ENTITY_VO).generate(table);
 			new GenerateCode(FileType.DAO).generate(table);
 			new GenerateCode(FileType.SERVICE).generate(table);
 			new GenerateCode(FileType.SERVICE_IMPL).generate(table);

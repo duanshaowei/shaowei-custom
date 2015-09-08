@@ -13,7 +13,7 @@ import freemarker.template.Template;
 
 /**
  * 
- * @author 	<a href="mailto:ketayao@gmail.com">ketayao</a>
+ * 
  * @since   2013年10月24日 上午9:59:25
  */
 public class FreeMarkers {

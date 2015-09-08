@@ -20,6 +20,7 @@ public class Resources {
 	public static String JDBC_USERNAME = "root";
 	public static String JDBC_PASSWORD = "root";
 	
+	public static DRIVER DRIVER_TYP = DRIVER.MAYSQL;
 	public static String TPL_TABLE_NAME;
 	public static String TPL_PACKAGE_NAME;
 	//模块名，例：sys
@@ -38,12 +39,17 @@ public class Resources {
 	static {
 		Properties pops = new Properties();
 		try {
-			pops.load(Resources.class.getResourceAsStream("/template_settings.properties"));
+			pops.load(Resources.class.getResourceAsStream("/settings.properties"));
 			// JDBC
 			JDBC_DRIVER = pops.getProperty("jdbc.driver");
 			JDBC_URL = pops.getProperty("jdbc.url");
 			JDBC_USERNAME = pops.getProperty("jdbc.username");
 			JDBC_PASSWORD = pops.getProperty("jdbc.password");
+			if ("com.mysql.jdbc.Driver".equals(JDBC_DRIVER)) {
+				DRIVER_TYP = DRIVER.MAYSQL;
+			} else if ("oracle.jdbc.driver.OracleDriver".equals(JDBC_DRIVER)) {
+				DRIVER_TYP = DRIVER.ORACLE;
+			}
 			
 			// TPL模板参数
 			TPL_TABLE_NAME = pops.getProperty("tpl.table.name");
@@ -65,6 +71,7 @@ public class Resources {
 			}
 
 			PKN_ENTITY = TPL_PACKAGE_NAME + ".entity";
+			PKN_ENTITY_VO = TPL_PACKAGE_NAME + ".vo";
 			PKN_DAO = TPL_PACKAGE_NAME + ".dao";
 			PKN_SERVICE = TPL_PACKAGE_NAME + ".service";
 			PKN_SERVICE_IMPL = TPL_PACKAGE_NAME + ".service.impl";
@@ -82,6 +89,7 @@ public class Resources {
 	
 	// 包名配置
 	public static String PKN_ENTITY;
+	public static String PKN_ENTITY_VO;
 	public static String PKN_DAO;
 	public static String PKN_SERVICE;
 	public static String PKN_SERVICE_IMPL;
@@ -91,6 +99,7 @@ public class Resources {
 	public static final String TEMPLATE_PATH = "src/template/";
 	
 	public static final String JAVA_ENTITY_TEMPLATE = "java_entity.ftl";
+	public static final String JAVA_ENTITY_VO_TEMPLATE = "java_vo.ftl";
 	public static final String JAVA_DAO_TEMPLATE = "java_dao.ftl";
 	public static final String JAVA_SERVICE_TEMPLATE = "java_service.ftl";
 	public static final String JAVA_SERVICE_IMPL_TEMPLATE = "java_service_impl.ftl";
@@ -100,4 +109,8 @@ public class Resources {
 	public static final String JSP_CREATE_TEMPLATE = "jsp_create.ftl";
 	public static final String JSP_UPDATE_TEMPLATE = "jsp_update.ftl";
 	public static final String JSP_VIEW_TEMPLATE = "jsp_view.ftl";
+	
+	public enum DRIVER {
+		MAYSQL , ORACLE;
+	}
 }

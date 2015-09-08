@@ -1,6 +1,3 @@
-/**
- * There are <a href="https://github.com/ketayao/keta-custom">keta-custom</a> code generation
- */
 package	${pknServiceImpl};
 
 import java.util.List;
@@ -15,7 +12,12 @@ import com.ketayao.ketacustom.util.dwz.PageUtils;
 import ${pknEntity}.${className};
 import ${pknDAO}.${className}DAO;
 import ${pknService}.${className}Service;
-
+/**
+  *   
+  *   @author Shaowei Duan
+  *   @since  ${createDate?string("yyyy年MM月dd日 HH:mm:ss")}
+  *
+  */
 @Service
 @Transactional
 public class ${className}ServiceImpl implements ${className}Service {

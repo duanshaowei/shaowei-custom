@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.shaowei.custom.generate.util.Resources;
 import com.shaowei.custom.generate.vo.Column;
 import com.shaowei.custom.generate.vo.Table;
@@ -23,7 +25,7 @@ public class Oracle extends DataSource {
 
 		props.put("remarksReporting", "true");
 		props.put("user", Resources.JDBC_USERNAME);
-		props.put("password", Resources.JDBC_USERNAME);
+		props.put("password", Resources.JDBC_PASSWORD);
 
 		try {
 			Class.forName(Resources.JDBC_DRIVER).newInstance();
@@ -86,6 +88,7 @@ public class Oracle extends DataSource {
 			getColumns(rs, t);
 			rs = dmd.getPrimaryKeys(null, null, tableName);
 			t.setPk(getPk(rs));
+			t.setDriveType(Resources.DRIVER_TYP.toString());
 		} catch (SQLException e) {
 			throw e;
 		} finally {
@@ -93,7 +96,7 @@ public class Oracle extends DataSource {
 		}
 		return t;
 	}
-
+	
 	/**
 	 * 获取所有列
 	 * 
@@ -111,7 +114,7 @@ public class Oracle extends DataSource {
 			col.setNullable(rs.getBoolean("NULLABLE"));
 			col.setDigits(rs.getInt("DECIMAL_DIGITS"));
 			col.setDefaultValue(rs.getString("COLUMN_DEF"));
-			col.setComment(rs.getString("REMARKS"));
+			col.setComment(StringUtils.isEmpty(rs.getString("REMARKS"))?"":rs.getString("REMARKS"));
 			t.getColumns().add(col);
 		}
 	}
