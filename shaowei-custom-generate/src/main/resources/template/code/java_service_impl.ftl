@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import org.dozer.DozerBeanMapper;
 import com.ketayao.ketacustom.util.dwz.Page;
 import com.ketayao.ketacustom.util.dwz.PageUtils;
 import ${pknEntity}.${className};
@@ -19,7 +19,7 @@ import ${pknService}.${className}Service;
   *
   */
 @Service
-@Transactional
+@Transactional(readOnly=true)
 public class ${className}ServiceImpl implements ${className}Service {
 	
 	@Autowired
@@ -39,8 +39,14 @@ public class ${className}ServiceImpl implements ${className}Service {
 	 * @see ${pknService}.${className}Service#saveOrUpdate(${pknEntity}.${className})  
 	 */
 	@Override
+	@Transactional
 	public void saveOrUpdate(${className} ${instanceName}) {
-		${instanceName}DAO.save(${instanceName});
+	   ${className} destinationClass = ${instanceName}.getId() != null ? 
+	                                ${instanceName}DAO.findOne(${instanceName}.getId()):${instanceName};
+	
+	   new DozerBeanMapper().map(${instanceName} , destinationClass);
+	   
+	   ${instanceName}DAO.save(destinationClass);
 	}
 
 	/*
@@ -48,8 +54,19 @@ public class ${className}ServiceImpl implements ${className}Service {
 	 * @see ${pknService}.${className}Service#delete(java.lang.Long)  
 	 */
 	@Override
+	@Transactional
 	public void delete(Long id) {
 		${instanceName}DAO.delete(id);
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see ${pknService}.${className}Service#deleteInBatch(java.lang.Iterable)  
+	 */
+	@Override	
+	@Transactional
+	public void deleteInBatch(Iterable<${className}> paramIterable) {
+	    ${instanceName}DAO.deleteInBatch(paramIterable);
 	}
 	
 	/*
