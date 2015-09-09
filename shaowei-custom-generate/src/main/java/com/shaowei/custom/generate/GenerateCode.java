@@ -33,7 +33,7 @@ public class GenerateCode extends AbstractGenerate implements Generate {
 		model.put("columns", table.getColumns());
 		model.put("createDate", table.getCreateDate());
 		model.put("driveType", table.getDriveType());
-		
+		model.put("className", table.getClazzName());
 		// 特殊类型处理
 		handleSpecial(table.getColumns());
 
@@ -41,7 +41,7 @@ public class GenerateCode extends AbstractGenerate implements Generate {
 		String content = FreeMarkers.renderTemplate(template, model);
 		// 生成java
 		if (fileType.getFileNameExtension().endsWith(".java")) {
-			String filePath = javaPath + fileType.getJavaStorePath() + separator + Resources.TPL_CLASS_NAME + fileType.getFileNameExtension();
+			String filePath = javaPath + fileType.getJavaStorePath() + separator + table.getClazzName() + fileType.getFileNameExtension();
 			FileUtils.writeFile(content, filePath);
 			
 			logger.info(fileType.getType() + ": {}", filePath);

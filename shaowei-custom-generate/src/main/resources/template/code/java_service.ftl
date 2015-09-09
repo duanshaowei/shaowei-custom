@@ -18,6 +18,8 @@ public interface ${className}Service {
 
 	void saveOrUpdate(${className} ${instanceName});
 
+    void deleteInBatch(Iterable<${className}> paramIterable);
+
 	void delete(Long id);
 	
 	List<${className}> findAll(Page page);
